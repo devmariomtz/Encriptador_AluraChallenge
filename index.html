@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Encriptador</title>
+
+    <!-- Estilos -->
+    <link rel="stylesheet" href="reset.css">
+    <link rel="stylesheet" href="style.css">
+
+    <!-- Tipografia -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300&family=PT+Mono&family=Roboto+Mono:wght@500&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+    <header>
+        <div class="header-container">
+            <img class="img-header" src="img/logo.png" alt="" title="Encriptador">
+            <div class="title-header">
+                <p>Encriptador</p>
+            </div>
+        </div>
+
+    </header>
+
+    <main>
+
+        <section class="main">
+            <section class="encriptar">
+                <textarea name="" id="input" cols="20" rows="5"></textarea>
+                <div class="btn-encriptar">
+                    <input class="button" id="encriptar-btn" type="button" value="Encriptar">
+                    <input class="button" id="desencriptar-btn" type="button" value="Desencriptar">
+                </div>
+
+            </section>
+            <section class="desencriptar">
+                <div class="desencriptar-empty" id="desencriptar-empty">
+                    <img src="img/empty.png" alt="">
+                    <p>Ingrese un mensaje</p>
+                </div>
+                <div class="desencriptar-result" id="desencriptar-result">
+                    <textarea name="" id="output" cols="20" rows="5"></textarea>
+                    <div class="btn-desencriptar">
+                        <input class="button" id="copy" type="button" value="Copiar" >
+                        <span id="message"></span>
+                    </div>
+                    
+                </div>
+            </section>
+        </section>
+
+
+    </main>
+
+
+    <footer>
+        <div class="footer-container">
+            <div class="social-footer">
+                <p>Follow me:</p>
+                <a href="https://twitter.com/MartinezMario__"><img class="social-icon" src="img/twitter.png" alt="twitter" title="twitter"></a>
+                <a href="mailto:mario2172cruz@gmail.com"><img class="social-icon" src="img/hangouts.png" alt="email" title="email"></a>
+                <a href="https://github.com/Martinez-Mario"><img class="social-icon" src="img/github.png" alt="github" title="github"></a>
+                <a href="https://www.linkedin.com/in/mario-martinez/"><img class="social-icon" src="img/linkedin.png" alt="linkedin" title="linkedin"></a>
+            </div>
+            <p class="copyright">&copy; Copyright Mario Martínez - 2022</p>
+        </div>
+    </footer>
+
+    <!-- Scripts  -->
+    <script>
+
+        function encriptar() {
+            var input = document.querySelector("#input").value.toLowerCase();
+            var text_encripted = "";
+
+            if (input.trim().length != 0) {
+                for (i = 0; i < input.length; i++) {
+                    if (input[i] == 'e') {
+                        text_encripted += "enter";
+                    }
+                    else if (input[i] == 'i') {
+                        text_encripted += "imes";
+                    }
+                    else if (input[i] == 'a') {
+                        text_encripted += "ai";
+                    }
+                    else if (input[i] == 'o') {
+                        text_encripted += "ober";
+                    }
+                    else if (input[i] == 'u') {
+                        text_encripted += "ufat";
+                    } else {
+                        text_encripted += input[i];
+                    }
+                }
+                document.getElementById("desencriptar-empty").style.display = "none";
+                document.getElementById("desencriptar-result").style.display = "block";
+                document.querySelector("#output").value = text_encripted;
+
+
+            } else {
+                alert("Ingrese un texto válido");
+            }
+
+
+
+        }
+        function desencriptar() {
+            var input = document.querySelector("#input").value.toLowerCase();
+            var text_desencripted = "";
+
+
+            if (input.trim().length != 0) {
+                text_desencripted = input.replaceAll("ai", "a").replaceAll("ober", "o").replaceAll("imes", "i").replaceAll("enter", "e").replaceAll("ufat", "u");
+
+                document.getElementById("desencriptar-empty").style.display = "none";
+                document.getElementById("desencriptar-result").style.display = "block";
+                document.querySelector("#output").value = text_desencripted;
+
+
+            } else {
+                alert("Ingrese un texto válido");
+            }
+        }
+
+        function copy(){
+            var output = document.querySelector("#output");
+            var message = document.querySelector("#message");
+            output.focus();
+            document.execCommand("selectAll");
+            document.execCommand("copy");
+            message.innerHTML = "Texto Copiado";
+            setTimeout(()=> message.innerHTML = " ", 1000)
+        }
+        var btn_encriptar = document.querySelector("#encriptar-btn");
+        var btn_desencriptar = document.querySelector("#desencriptar-btn");
+        var btn_copy = document.querySelector("#copy");
+        btn_encriptar.onclick = encriptar;
+        btn_desencriptar.onclick = desencriptar;
+        btn_copy.onclick = copy;
+
+    </script>
+</body>
+
+</html>
